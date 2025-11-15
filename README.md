@@ -49,11 +49,11 @@ Lune provides fully asynchronous APIs wherever possible, and is built in Rust ðŸ
 
 ### Installation
 1. Clone this repository
-  ```bash
+  ```sh
   git clone https://github.com/Footagesus/lune.git
   ```
 2. Build with crates.io (cargo)
-  ```bash
+  ```sh
   cargo build --release
   ```
 
