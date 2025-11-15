@@ -24,8 +24,8 @@
 
 <br/>
 
-A standalone [Luau](https://luau-lang.org) runtime.
-
+A standalone [Luau](https://luau-lang.org) runtime  |  With Android/Termux support !! Some things may not work!
+```
 Write and run programs, similar to runtimes for other languages such as [Node](https://nodejs.org), [Deno](https://deno.land), [Bun](https://bun.sh), or [Luvit](https://luvit.io) for vanilla Lua.
 
 Lune provides fully asynchronous APIs wherever possible, and is built in Rust ðŸ¦€ for speed, safety and correctness.
@@ -42,6 +42,7 @@ Lune provides fully asynchronous APIs wherever possible, and is built in Rust ðŸ
 
 - Making programs short and terse - proper autocomplete / intellisense make using Lune just as quick, and readability is important
 - Running full Roblox games outside of Roblox - there is some compatibility, but Lune is meant for different purposes
+```
 
 ## Where do I start?
 
@@ -58,3 +59,6 @@ Lune provides fully asynchronous APIs wherever possible, and is built in Rust ðŸ
   ```
 
 the result will be in `./target/release/lune`
+
+## Termux Preview
+![preview](public/preview.png)
