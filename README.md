@@ -45,4 +45,16 @@ Lune provides fully asynchronous APIs wherever possible, and is built in Rust ðŸ
 
 ## Where do I start?
 
-Head over to the [Installation](https://lune-org.github.io/docs/getting-started/1-installation) page to get started using Lune!
+~~Head over to the [Installation](https://lune-org.github.io/docs/getting-started/1-installation) page to get started using Lune!~~
+
+### Installation
+1. Clone this repository
+  ```bash
+  git clone https://github.com/Footagesus/lune.git
+  ```
+2. Build with crates.io (cargo)
+  ```bash
+  cargo build --release
+  ```
+
+the result will be in `./target/release/lune`
