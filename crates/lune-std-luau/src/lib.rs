@@ -81,8 +81,12 @@ fn load_source(
 
     // Enable JIT if codegen is enabled and the environment hasn't
     // changed, otherwise disable JIT since it'll fall back anyways
+    #[cfg(feature = "luau-jit")]
     lua.enable_jit(options.codegen_enabled && !env_changed);
+    
     let function = chunk.into_function()?;
+    
+    #[cfg(feature = "luau-jit")]
     lua.enable_jit(
         lua.app_data_ref::<JitEnablement>()
             .ok_or(LuaError::runtime(

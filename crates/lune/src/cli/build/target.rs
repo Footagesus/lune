@@ -1,19 +1,12 @@
 use std::{env::consts::ARCH, fmt, path::PathBuf, str::FromStr, sync::LazyLock};
-
 use directories::BaseDirs;
 
 static HOME_DIR: LazyLock<PathBuf> = LazyLock::new(|| {
-    BaseDirs::new()
-        .expect("could not find home directory")
-        .home_dir()
-        .to_path_buf()
+    BaseDirs::new().expect("could not find home directory").home_dir().to_path_buf()
 });
 
 pub static CACHE_DIR: LazyLock<PathBuf> = LazyLock::new(|| HOME_DIR.join(".lune").join("target"));
 
-/**
-    A target operating system supported by Lune
-*/
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BuildTargetOS {
     Windows,
@@ -25,15 +18,13 @@ impl BuildTargetOS {
     fn current_system() -> Self {
         match std::env::consts::OS {
             "windows" => Self::Windows,
-            "linux" => Self::Linux,
+            "linux" | "android" => Self::Linux,
             "macos" => Self::MacOS,
             _ => panic!("unsupported target OS"),
         }
     }
 
     fn exe_extension(self) -> &'static str {
-        // NOTE: We can't use the constants from std since
-        // they are only accessible for the current target
         match self {
             Self::Windows => "exe",
             _ => "",
@@ -63,16 +54,13 @@ impl FromStr for BuildTargetOS {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.trim().to_ascii_lowercase().as_str() {
             "win" | "windows" => Ok(Self::Windows),
-            "linux" => Ok(Self::Linux),
+            "linux" | "android" => Ok(Self::Linux),
             "mac" | "macos" | "darwin" => Ok(Self::MacOS),
             _ => Err("invalid target OS"),
         }
     }
 }
 
-/**
-    A target architecture supported by Lune
-*/
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BuildTargetArch {
     X86_64,
@@ -164,13 +152,9 @@ impl fmt::Display for BuildTarget {
 impl FromStr for BuildTarget {
     type Err = &'static str;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let (left, right) = s
-            .split_once('-')
-            .ok_or("target must be in the form `os-arch`")?;
-
+        let (left, right) = s.split_once('-').ok_or("target must be in the form `os-arch`")?;
         let os = left.parse()?;
         let arch = right.parse()?;
-
         Ok(Self { os, arch })
     }
 }
